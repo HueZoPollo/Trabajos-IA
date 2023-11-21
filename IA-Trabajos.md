@@ -1,8 +1,8 @@
 # Introducción a la Inteligencia Artificial. Actividad 1 - Práctica 1
 
-#### Redactar un ensayo mínimo 2000 palabras, del capitulo 1,2, 26, 27,apartado A del libro, inteligencia artificial un enfoque moderno.
+## Redactar un ensayo mínimo 2000 palabras, del capitulo 1,2, 26, 27,apartado A del libro, inteligencia artificial un enfoque moderno.
 
-## Introducción
+### Introducción
 
 En la actualidad los hombres nos hemos denominado Homo Sapiens (Hombre Sabio), esto debido a nuestra capacidad mentales. Aun así, durante miles de años hemos tratado de comprender como es que nosotros “pensamos”, es decir, como nosotros siendo un puñado de materia es capaz de predecir, percibir, entender las cosas a nuestro alrededor. En el ámbito de la Inteligencia Artificial (IA), no solo intenta comprender el como lo hacemos, si no, trata de generar o construir entidades inteligentes.
 
@@ -10,7 +10,7 @@ La IA como tal se comenzó a trabajar después de la Segunda Guerra Mundial y se
 
 Pero ¿Qué es la IA o que define a una IA?
 
-## Desarrollo
+### Desarrollo
 
 En el capitulo 1 del libro de “Inteligencia Artificial: un enfoque moderno” de Stuart Russell y Peter Norving, nos definen la IA de varias maneras extrayendo varios conceptos de libros diferentes, dividiéndolos en 2 secciones, la primera es la sección que se puede denominar como “el proceso de actuar de los humanos” y el segundo alude a un tema muy interesante, la **racionalidad**, este mismo se da a entender en el libro como un concepto ideal de la inteligencia. Igualmente se da un concepto de racionalidad: “Un sistema es racional si hace lo «correcto» , en función de su conocimiento”.
 
@@ -88,6 +88,7 @@ Y por último, al final del capítulo da una reflexión sobre la dirección que 
 3.	Racionalidad limitada. la racionalidad limitada funciona en primer lugar satisfaciendo, es decir, deliberando sólo el tiempo necesario para elaborar una respuesta que sea lo suficientemente buena.
 4.	Optimalidad limitada. Un agente óptimo limitado se comporta todo lo bien que puede, dado sus recursos computacionales. Es decir, la utilidad esperada del programa agente para un agente óptimo limitado es por lo menos tan elevada como la utilidad esperada de cualquier otro programa agente que se ejecute en la misma máquina.
 
+### Conclusiones
 
 En resumen, la inteligencia artificial es un campo interdisciplinario complejo que incluye filosofía, matemáticas, neurociencia, ingeniería computacional, teoría de control, pasando por el ámbito económico y psicológico.  La IA está en constante evolución, desde sus fundamentos hasta sus desafíos éticos, y promete cambiar fundamentalmente la forma en que la sociedad interactúa con la tecnología.
 
@@ -95,5 +96,64 @@ En resumen, la inteligencia artificial es un campo interdisciplinario complejo q
 
  La intersección de diferentes enfoques y disciplinas en este campo determina no sólo cómo creamos máquinas inteligentes, sino también cómo estas máquinas impactan en la sociedad y qué significa ser inteligente.
 
+## 
+
+## Redactar un ensayo del Documental sobre IA mínimo 3000 palabras.
+
+##
+
+# Introducción a la Inteligencia Artificial: Tipos deInteligencia.
+
+## Escribir un ensayo mínimo de 4 cuartillas de la teoría de las inteligencias múltiples según Gardner
 
 
+### Introducción
+
+La teoría de las inteligencias múltiples de Gardner fue una propuesta hecha por el psicólogo Howard Gardner en la década de los 80s, esta teoría surgió como un contrapeso de la idea o paradigma de que existe una inteligencia única. Gardner sostiene que la inteligencia es un fenómeno mucho más diverso y complejo, y propone la existencia de múltiples formas de inteligencia, cada una con sus propias características y modos de expresión.
+
+Durante el transcurso del siguiente ensayo se explicarán los distintos tipos de inteligencia que Gardner expuso.
+
+### Desarrollo
+
+Para entender el desarrollo de la teoría que Gardner propuso es necesario, primero, conocer como es que se entiende la inteligencia, que fue en lo que Gardner se interesó inicialmente para asi poner en duda el concepto. 
+
+La inteligencia, esta sumamente ligado a lo que se conoce como cociente intelectual, el cual está dado por pruebas de inteligencia y pruebas psicométricas; y a pesar de que este tipo de pruebas se han modificado, desarrollado y perfeccionando para poder generar medidas objetivas de la capacidad intelectual de las personas, estos no están libres de sesgos, ya que las estas están diseñadas para adaptarse a la sociedad actual, dando valor a diferentes capacidad que se consideran básicas para un ser humano, como lo son el hablar, el dominio de las matemáticas y el razonamiento lógico.
+
+De esta idea Howard Gardner propuso y defendió la teoría de que la inteligencia no puede estar necesariamente entendida como una unidad, si no, puede entenderse como múltiples habilidades de procesamiento de la información, que funcionan de manera paralela e independiente unas de las otras. Esto lo podemos entender con el cociente intelectual, por ejemplo: si una persona obtiene un bajo CI, es muy probable que sea mas inteligente en otros ámbitos que no son entendidos ni atendidos por las pruebas que te dan ese CI.
+
+Gardner identifica ocho inteligencias diferentes, cada una representando una forma única de habilidad cognitiva. Estas inteligencias incluyen la lingüística, lógico-matemática, espacial, musical, corporal-cinestésica, interpersonal, intrapersonal y naturalista. Cada una de estas dimensiones refleja la diversidad de habilidades y talentos que las personas pueden poseer.
+
+**1. Lingüística:**
+Esta inteligencia se relaciona con la habilidad para el lenguaje, tanto en la expresión escrita como hablada. Personas con una fuerte inteligencia lingüística tienden a sobresalir en la comunicación verbal y en la apreciación de la lengua. En este ámbito destacan una gran cantidad de profesiones como los son: la política, la escritura, la poesía, periodismo, actuación, etc.
+
+**2. Lógico-Matemática:**
+Aquí, la inteligencia se manifiesta en la capacidad para el razonamiento lógico, el análisis matemático y la resolución de problemas. Las personas con esta inteligencia pueden destacar en disciplinas como la ciencia y la ingeniería. Es en esta inteligencia en la que las pruebas de cociente intelectual se basan mas para sacar los resultados “objetivos”, junto con la inteligencia lingüística pero en menor medida.
+
+**3. Espacial:**
+La inteligencia espacial se refiere a la habilidad para visualizar y manipular objetos en el espacio. Las personas que destacan en este tipo de inteligencia suelen tener capacidades que les permiten idear imágenes mentales, dibujar y detectar detalles, además de un sentido personal por la estética. En esta inteligencia encontramos pintores, fotógrafos, diseñadores, publicistas, arquitectos, creativos, etc.
+
+**4. Musical:**
+Esta forma de inteligencia está vinculada a la apreciación y producción de la música. Gardner sugiere que la capacidad para entender patrones musicales y expresarse a través del sonido es una forma válida de inteligencia. Algunas zonas del cerebro ejecutan funciones vinculadas con la interpretación y composición de música y como cualquier otro tipo de inteligencia, puede entrenarse y perfeccionarse. Está de más mencionar que aquí destacan todas las personas que puedan tocar un instrumento o leer y componer piezas musicales.
+
+**5. Corporal-cinestésica:**
+La inteligencia corporal-cinestésica se manifiesta en la habilidad para controlar el cuerpo y manipular objetos de manera hábil. Atletas, bailarines y artesanos son los que por general muestran esta forma de inteligencia.
+
+**6. Interpersonal:**
+La inteligencia interpersonal se refiere a la capacidad para entender y relacionarse efectivamente con los demás. Es una inteligencia muy valiosa para las personas que trabajan con grupos numerosos. Su habilidad para detectar y entender las circunstancias y problemas de los demás resulta más sencillo si se posee (y se desarrolla) la inteligencia interpersonal. Profesores, psicólogos, terapeutas, abogados y pedagogos son perfiles que suelen desarrollar mas este tipo de inteligencia.
+
+**7. Intrapersonal:**
+Aquí, la inteligencia se enfoca en la comprensión de uno mismo, incluyendo la auto reflexión y la conciencia emocional. Aquellos con una inteligencia intrapersonal desarrollada pueden tener un conocimiento profundo de sus propias emociones y motivaciones. Según Gardner, esta inteligencia también permite ahondar en la introspección y entender las razones por las cuales uno es de la manera que es.
+
+**8. Naturalista:**
+La inteligencia naturalista implica una sensibilidad y aprecio por la naturaleza y el medio ambiente. Abarca la capacidad de distinguir, clasificar los detalles y los elementos del ambiente urbano, de los suburbios o el rural. Personas con esta inteligencia pueden tener una afinidad especial con los seres vivos y la ecología. 
+Esta inteligencia fue añadida posteriormente al estudio original sobre las Inteligencias Múltiples de Gardner, en el año 1995. Gardner consideró necesario incluir esta categoría por tratarse de una de las inteligencias esenciales para la supervivencia del ser humano (o cualquier otra especie) y que ha redundado en la evolución.
+
+Es necesario destacar que durante el transcurso del tiempo, han surgido mas propuestas de inteligencia como, la culinaria, la sexual, la humorística o la digital, pero ninguna de ellas ha sido avaladas por Gardner, quedando hasta el día de hoy solo las ocho mencionadas.
+
+Aunque la teoría de las inteligencias múltiples ha ganado aceptación y aplicación en la educación y a pesar de que revoluciono los ámbitos de la psicología, el laboral y el ámbito personal también ha enfrentado críticas. La más importante es el argumento de que la teoría carece de una base científica sólida y que las distintas inteligencias propuestas podrían ser simplemente habilidades o talentos en lugar de formas de inteligencia separadas. Además, algunos críticos dicen que la teoría de las inteligencias múltiples puede llevar a una sobrevaloración de las fortalezas individuales en detrimento de las habilidades académicas esenciales, al interpretarlas como estilos de aprendizaje.
+
+### Conclusiones
+
+La teoría de las inteligencias múltiples de Gardner revoluciono la forma de comprensión de la inteligencia al reconocer y celebrar la diversidad de habilidades humanas. Al considerar las distintas formas en que las personas pueden destacar, la teoría proporciona un marco valioso para la educación y el desarrollo personal. 
+
+Al aceptar la idea de que la inteligencia es multifacética y multidisciplinaria, nosotros como seres humanos podemos crear y especializarnos en entornos más efectivos al tipo de inteligencia y habilidad que poseamos, al existir el concepto de estas múltiples inteligencias es más fácil comprender de manera más completa la capacidad humana en general, y la capacidad personal que podemos llegar a alcanzar.
