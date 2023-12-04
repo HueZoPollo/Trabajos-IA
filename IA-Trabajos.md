@@ -285,6 +285,38 @@ Coloca ocho alfiles (cuatro blancos y cuatro negros) en un tablero de ajedrez, t
 
 ![Ajedrez](image.png)
 
+### Introducción
+
+El juego del ajedrez, con su intrincada red de estrategias y movimientos, presenta desafíos únicos que estimulan la mente y despiertan la creatividad de aquellos que se aventuran en sus cuadriculadas batallas. Uno de estos desafíos es el problema de los ocho alfiles.
+
+### Desarrollo
+
+En el problema de los ocho alfiles del ajedrez, obtuve 16 movimientos, esto sale debido a que realice el movimiento del blanco y negro en una misma instancia o mismo “tablero” por asi decirlo.
+
+En este problema, para entender un poco el contexto del juego, hay que diferenciar los movimientos de los alfiles de las demás piezas del juego. Los alfiles en si se mueven diagonalmente hasta donde permite el tablero, este tipo de movimiento nos da juego a varias situaciones bastante peculiares en el tablero, pero hay que comenzar deshilando la serie de movimientos que se realizaron.
+
+Primero que nada, hay que jugar mucho con el centro del tablero, específicamente con las seis casillas centrales disponibles. Con eso en mente, el primer movimiento es hacia el centro siempre, las dos piezas a mover, tanto blanco como negro, y en el caso propuesto las fichas que se mueven forman un tipo espejo.
+
+En realidad, todos los movimientos los realice haciendo movimientos espejo, es decir, que si una blanca se mueve hacia algún lugar, la pieza negra se mueve en perspectiva de la misma forma pero en sentido contrario.
+
+Después de varios movimientos, es necesario regresar, que en un principio, puede llegar a resultar un poco raro y que estas retrocediendo en lugar de avanzar, es absolutamente necesario hacerlo para que los movimientos de otras piezas ataquen a las que queremos mover en ese momento.
+
+En cierto punto de los movimientos se aprecia que las piezas se acomodan de manera mitad blancas y mitad negras en ambos lados, ese es un punto intermedio de los movimientos, y como mencione anteriormente es necesario mover ciertas piezas que ya se encuentran en el lugar indicado o del lado correcto para poder seguir haciendo movimientos.
+
+Al final se obtiene el resultado esperado, que es mover todas las piezas al otro lado del tablero de cada color.
+
+### Conclusión
+
+Este ejercicio de los alfiles nos muestra un problema de lógica y muchas veces de prueba y error, pero analizándolo un poco mejor y sobre todo viendo los movimientos que realizamos se observa mucho el movimiento espejo que realizan las piezas, justo en cada movimiento, y viéndolo de manera general a partir del movimiento 9 de ambos lados, se ve un poco de movimientos espejo en los siguientes movimientos de ambos.
+
+Es bastante interesante el problema por el pensamiento y razonamiento que se tiene que realizar para poder mover las piezas de manera correcta, y al mismo tiempo visualizar los movimientos de las demás piezas existentes del color contrario.
+
+A continuación, se muestran los movimientos y el resultado obtenido:
+
+![Ajedrez-1](image-7.png)
+
+![Ajedrez-2](image-8.png)
+
 ---
 
 # Introducción a la Inteligencia Artificial: Introspección
