@@ -276,3 +276,118 @@ Aunque la teoría de las inteligencias múltiples ha ganado aceptación y aplica
 La teoría de las inteligencias múltiples de Gardner revoluciono la forma de comprensión de la inteligencia al reconocer y celebrar la diversidad de habilidades humanas. Al considerar las distintas formas en que las personas pueden destacar, la teoría proporciona un marco valioso para la educación y el desarrollo personal.
 
 Al aceptar la idea de que la inteligencia es multifacética y multidisciplinaria, nosotros como seres humanos podemos crear y especializarnos en entornos más efectivos al tipo de inteligencia y habilidad que poseamos, al existir el concepto de estas múltiples inteligencias es más fácil comprender de manera más completa la capacidad humana en general, y la capacidad personal que podemos llegar a alcanzar.
+
+# Introducción a la Inteligencia Artificial: Introspección
+
+## Se requiere resolver el siguiente problema analizando la forma en que usted mismo resuelve el problema. Redactar un ensayo de la solución mínima de 3 cuartillas.
+
+Coloca ocho alfiles (cuatro blancos y cuatro negros) en un tablero de ajedrez, tal como se ve en la figura. El problema consiste en hacer que los alfiles negros intercambien posiciones con los blancos, ningún alfil debe atacar en ningún momento otro del colo opuest. Se deben alternar los movimientos, primero uno blanco, luego uno negro, luego uno blanco y así sucesivamente. ¿Cuál es el mínimo número de movimientos en que se puede conseguir?
+
+![Ajedrez](image.png)
+
+---
+
+# Introducción a la Inteligencia Artificial: Introspección
+
+## Se requiere resolver el siguiente problema analizado la forma es queusted mismo resuelve el problema redactar un ensayo de la solución mínimo 1 cuartilla.
+
+Se trata de contar el numero de elementos (islas) contenidos en la siguiente imagen, se requiere lo siguiente:
+
+- Hacer un programa que pueda contar el numero de elementos que son del mismo color.
+- Utilizar método iterativo y recursivo.
+
+![Islas](image-1.png)
+
+# Introducción a la Inteligencia Artificial: Introspección
+
+## Se requiere resolver el siguiente problema analizado la forma es que usted mismo resuelve el problema.
+
+Una vez que se resolvió el algoritmo de las islas en la siguiente imagen contar los elementos que tienen el color rojo.
+
+![Rojos](image-2.png)
+
+# Introducción a la Inteligencia Artificial: El proceso de razonamiento según la lógica
+
+## 1. Dado el siguiente problema hacer el planteamiento matemático y programar el siguiente problema
+
+La historia que sigue es una versión adaptada de lo que –supuestamente—sucedió durante el siglo I. Sí, el siglo uno. Suena raro, ¿no? Más aún: esa historia dio origen a un problema clásico de la matemática/computación quesobrevivió el paso del tiempo. Se lo conoce con el nombre del “Problema deJosephus”, ya que se supone que fue Flavius Josephus, un historiador judíonacido en Jerusalén, quien describió la situación que vivieron él y 40 soldados que lo acompañaban.
+
+En un momento determinado de la guerra judeo-romana, Josephus y su grupo cayeron en una emboscada y quedaron atrapados en una caverna rodeada de soldados enemigos. Después de debatir cómo proceder, optaron por suicidarse antes de ser capturados. Sin embargo, Josephus no estuvo de acuerdo con la propuesta y para que nadie tuviera que quitarse la vida,propuso el siguiente método:
+
+“Sentémonos todos en un círculo. Alguno de nosotros empezará primero y matará a quien tenga sentado a la izquierda y así vamos a seguir hasta que –claramente— quedará nada más que uno solo de nosotros con vida. Ese será el único que tendrá que suicidarse”.
+
+![Josephus](image-3.png)
+
+Allí están las cuarenta y un posiciones numeradas en forma creciente.Supongamos que empieza el que está sentado en la posición número 1. Ese soldado matará al 2. Luego, el 3 matará al 4, el 5 al 6. . . y así siguiendo. Como usted advierte, llegará un momento en el que habrán muerto todos los que están sentados en las posiciones que llevan un número par. Pero cuando muera el último de ellos, el número 40 (a manos del 39), el 41 estará vivo aún y ahora, el que tiene sentado a la izquierda es el número 1 quien había empezado con los asesinatos.
+
+De acuerdo con las reglas, el 41 matará al , el 3 al 5, etc. Creo que ahora esta claro que van a morir todos hasta que quede solamente uno con vida.
+
+Es aquí donde aparece una parte interesante de la historia de Josephus. En principio, habrían de morir todos los soldados que estaban con Josephusen la caverna, pero la diferencia es que quien quedara último tendría que suicidarse. . . Más aún: el sobreviviente tendría que quitarse la vida y no habría ningún otro integrante del grupo que estuviera vivo para verificar que lo hiciera.
+
+Como usted se imagina, Josephus eligió un lugar particular del círculo yse sentó allí. El sabía que siguiendo las reglas escritas más arriba, él habría de quedar como único sobreviviente. Esperó que todos estuvieran muertos, y en lugar de suicidarse, salió de la caverna y se entregó al enemigo.
+
+Pregunta: ¿en qué lugar se sentó Josephus?
+
+El problema es muy conocido en el mundo de la matemática y los programadores, y es por eso que hay muchísima literatura escrita sobre el tema, pero no hace falta saber nada particular para poder pensarlo. La versión que figura más arriba es solo una de las posibles variantes (la más sencilla) y si yo estuviera junto a usted, le sugeriría que no empiece con el caso delos 41 soldados, sino que intente con números más pequeños (de soldados) de manera tal de ver si le es posible intuir o imaginar una estrategia paradeterminar al ganador o sobreviviente a medida que va incrementando el número de soldados.
+
+De la misma forma, una vez que hayamos resuelto el problema para 41 soldados, sería interesante pensar en una estrategia que permita deducir cuál será la posición ganadora en el caso general, es decir, independizarse del número 41 y encontrar alguna estrategia o fórmula que permita deducir elnúmero que hay que elegir sin tener que recorrer todos los pasos intermedios.
+
+# Introducción a la Inteligencia Artificial: El papel de la heurística
+
+## Dado el siguiente laberinto
+
+- Definir que es la heurística y cual es su papel en la resolución deproblemas
+- Resolver con recursividad, programar.
+- Proponer Algoritmo de Solución, programar.
+- Describir el punto anterior.
+
+![Laberinto](image-4.png)
+
+# Reglas y Búsquedas: Espacio de estados
+
+## Generar el espacio de estados para los siguientes problemas
+
+### 1. El juego consiste en pasar las 3 ranas verdes a la derecha y las 3 ranas marrones a la izquierda. Las ranas pueden saltar a una piedra vacía quetengan delante, o saltar por encima de otra rana si en medio de ambas hay una piedra vacía.
+
+![Ranas](image-5.png)
+
+Ranas marrones (M) y ranas verdes (V)
+
+0. MMM_VVV
+1. MM_MVVV
+2. MMVM_VV
+3. MMVMV_V
+4. MMV_VMV
+5. M_VMVMV
+6. \_MVMVMV
+7. VM_MVMV
+8. VMVM_MV
+9. VMVMVM\_
+10. VMVMV_M
+11. VMV_VMM
+12. V_VMVMM
+13. VV_MVMM
+14. VVVM_MM
+15. VVV_MMM
+
+---
+
+### 2. Tres misioneros se perdieron explorando una jungla. Separados de sus compañeros, sin alimento y sin radio, solo sabían que para llegar a su destino debían ir siempre hacia adelante. Los tres misioneros se detuvieron frente a un río que les bloqueaba el paso, preguntándose que podían hacer. De repente, aparecieron tres caníbales llevando un bote, pues también ellos querían cruzar el río.Ya anteriormente se habían encontrado grupos de misioneros y caníbales, y cada uno respetaba a los otros, pero sin confiar en ellos. Los caníbales se daban un festín con los misioneros cuando les superaban en número. Los tres caníbales deseaban ayudar a los misioneros a cruzar el río, pero su bote no podía llevar más de dos personas a la vez y los misioneros no querían que los caníbales les superaran en número. ¿Cómo puede resolverse el problema, sin que en ningún momento haya más caníbales que misioneros en cualquier orilla del río? recuerda que un misionero y un caníbal en una orilla del río más uno o dos caníbales en el bote al mismo lado, significa que los misioneros tendrán problemas.
+
+![Misioneros](image-6.png)
+
+Monjes (M), Caníbales (C)
+
+1. Cruzan 1C y 1M al otro lado del rio. Sin cruzar: 2C, 2M. En el otro lado: 1C, 1M.
+2. Regresa 1M. Sin cruzar: 2C, 3M. En el otro lado: 1C.
+3. Cruzan 2C al otro lado del rio. Sin cruzar: 0C, 3M. En el otro lado: 3C.
+4. Regresa 1C. Sin cruzar: 1C, 3M. En el otro lado: 2C.
+5. Cruzan 2M al otro lado del rio. Sin cruzar: 1C, 1M. En el otro lado: 2C, 2M.
+6. Regresan 1C y 1M. Sin cruzar: 2C, 2M. En el otro lado: 1C, 1M.
+7. Cruzan 2M al otro lado del rio. Sin cruzar: 2C, 0M. En el otro lado: 1C, 3M.
+8. Regresa 1C. Sin cruzar: 3C, 0M. En el otro lado: 0C, 3M.
+9. Cruzan 2C al otro lado del rio. Sin cruzar: 1C, 0M. En el otro lado: 2C, 3M.
+10. Regresa 1M. Sin cruzar: 1C, 1M. En el otro lado: 2C, 2M.
+11. Cruzan 1M y 1C al otro lado del rio. Sin cruzar: 0C, 0M. En el otro lado: 3C, 3M.
+
+¡Listo! Todos han cruzado el río sin que los caníbales se coman a los monjes.
