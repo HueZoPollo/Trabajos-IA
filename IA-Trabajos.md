@@ -96,7 +96,7 @@ La comprensión y el uso ético de la inteligencia artificial serán fundamental
 
 La intersección de diferentes enfoques y disciplinas en este campo determina no sólo cómo creamos máquinas inteligentes, sino también cómo estas máquinas impactan en la sociedad y qué significa ser inteligente.
 
-##
+---
 
 ## Redactar un ensayo del Documental sobre IA mínimo 3000 palabras.
 
@@ -222,6 +222,8 @@ Ahora, que una maquina pueda revelarse en contra de los humanos, en el documenta
 
 En general el documental es bastante entretenido, y es una buena introducción a lo que es la inteligencia artificial para alguien que no este metido mucho en ese mundo.
 
+---
+
 # Introducción a la Inteligencia Artificial: Tipos de Inteligencia.
 
 ## Escribir un ensayo mínimo de 4 cuartillas de la teoría de las inteligencias múltiples según Gardner
@@ -277,6 +279,8 @@ La teoría de las inteligencias múltiples de Gardner revoluciono la forma de co
 
 Al aceptar la idea de que la inteligencia es multifacética y multidisciplinaria, nosotros como seres humanos podemos crear y especializarnos en entornos más efectivos al tipo de inteligencia y habilidad que poseamos, al existir el concepto de estas múltiples inteligencias es más fácil comprender de manera más completa la capacidad humana en general, y la capacidad personal que podemos llegar a alcanzar.
 
+---
+
 # Introducción a la Inteligencia Artificial: Introspección
 
 ## Se requiere resolver el siguiente problema analizando la forma en que usted mismo resuelve el problema. Redactar un ensayo de la solución mínima de 3 cuartillas.
@@ -321,7 +325,7 @@ A continuación, se muestran los movimientos y el resultado obtenido:
 
 # Introducción a la Inteligencia Artificial: Introspección
 
-## Se requiere resolver el siguiente problema analizado la forma es queusted mismo resuelve el problema redactar un ensayo de la solución mínimo 1 cuartilla.
+## Se requiere resolver el siguiente problema analizado la forma es que usted mismo resuelve el problema redactar un ensayo de la solución mínimo 1 cuartilla.
 
 Se trata de contar el numero de elementos (islas) contenidos en la siguiente imagen, se requiere lo siguiente:
 
@@ -329,6 +333,136 @@ Se trata de contar el numero de elementos (islas) contenidos en la siguiente ima
 - Utilizar método iterativo y recursivo.
 
 ![Islas](image-1.png)
+
+---
+
+### Resolución
+
+def contar_islas_recursivo(matriz):
+
+    filas = len(matriz)
+    columnas = len(matriz[0])
+    islas = 0
+
+    def contar(i, j):
+        if i >= filas or j >= columnas or matriz[i][j] == 0 or matriz[i][j] == 2:
+            return
+        matriz[i][j] = 2
+        contar(i + 1, j)
+        contar(i - 1, j)
+        contar(i, j + 1)
+        contar(i, j - 1)
+
+
+    for i in range(filas):
+        for j in range(columnas):
+            if matriz[i][j] == 1:
+                islas += 1
+                contar(i, j)
+            else:
+                matriz[i][j] = 2
+
+    return islas
+
+matriz_original = [
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+[0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0],
+[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0],
+[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0],
+[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+resultado = contar_islas_recursivo(matriz_original)
+print("Número de islas: " + str(resultado))
+
+---
+
+def contar_islas_iterativo(matriz):
+
+    filas = len(matriz)
+    columnas = len(matriz[0])
+    islas = 0
+
+    def contar(i, j):
+        lista = [(i, j)]
+        while lista:
+            x, y = lista.pop()
+            if  x < filas and y < columnas and matriz[x][y] == 1 and matriz[x][y] != 2:
+                matriz[x][y] = 2
+                lista.append((x + 1, y))
+                lista.append((x - 1, y))
+                lista.append((x, y + 1))
+                lista.append((x, y - 1))
+
+    for i in range(filas):
+        for j in range(columnas):
+            if matriz[i][j] == 1:
+                islas += 1
+                contar(i, j)
+            else:
+                matriz[i][j] = 2
+    return islas
+
+matriz_original = [
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+[0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0],
+[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0],
+[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0],
+[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+resultado = contar_islas_iterativo(matriz_original)
+print("Número de islas: " + str(resultado))
+
+### Ensayo
+
+El código en si no tiene mucha complicación, la dificultad se encuentra en la lógica a utilizar para que el resultado sea el esperado. En este caso, y a manera personal, se sintió más sencillo el código recursivo, debido a que solamente es llamar a las funciones a los cuatro lados de la casilla actual; aunque dicho método puede ser un poco confuso si no se esta muy familiarizado con la recursividad, pero al haber hecho un ejercicio a mano del mismo problema, y en donde, realizamos el método recursivo, solo era programar la lógica de las decisiones.
+
+Por otro lado, el método iterativo es un poco más difícil, ya por el simple hecho de que se necesita guardar las casillas donde se encuentre el valor 1 considerado como una isla, para asi poder contar las casillas anidadas a la primera encontrada y no contar erróneamente las islas totales.
+
+En ambos casos se utiliza un contador junto con la matriz, e igualmente la lógica es un poco parecida, sobre todo en el recorrido de las casillas, ya que en los dos códigos se intercambia el valor de la casilla visitada a 2, asi ya no se cuentan las casillas que ya revisamos con anterioridad, y no se realiza la lógica de conteo de islas.
+
+Ahora, explicando un poco los métodos, en el caso del recursivo, al encontrar una casilla con una isla y que no se halla visitado antes, se cuenta como una nueva isla y se hace el método siguiente: se marca la casilla visitada y se visita en ese momento los cuatro vecinos adyacentes a esa casilla, derecha, izquierda, abajo y arriba en ese orden, en busca de casillas con valor 1 que indicaría el seguimiento de la isla. Y asi se hará hasta que todos los valores adyacentes de las islas sean igual a 0 o 2.
+
+Y por último, en el caso iterativo, se genera una lista (pila) en donde se van guardando las coordenadas de las casillas que contiene una isla, en un primer caso es la primer casilla, y se van añadiendo coordenadas de las cuatro casillas adyacentes de la primer casilla; es una pila por que utiliza el principio LIFO o FILO, el cual es el primero en entrar, ultimo en salir (First In, Last Out). Y a partir de ahí, se van agregando coordenadas si es que la casilla adyacente tiene valor 1.
+
+Estos códigos son de mucha lógica en realidad, y es lo que en perspectiva va a costar muchísimo mas que ni en realizar el código, es mas un ejercicio mental que practico.
+
+---
 
 # Introducción a la Inteligencia Artificial: Introspección
 
