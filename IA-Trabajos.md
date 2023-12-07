@@ -283,7 +283,7 @@ Al aceptar la idea de que la inteligencia es multifacética y multidisciplinaria
 
 # Introducción a la Inteligencia Artificial: Introspección
 
-## Se requiere resolver el siguiente problema analizando la forma en que usted mismo resuelve el problema. Redactar un ensayo de la solución mínima de 3 cuartillas.
+## Se requiere resolver el siguiente problema analizando la forma en que usted mismo resuelve el problema. Redactar un ensayo de la solución.
 
 Coloca ocho alfiles (cuatro blancos y cuatro negros) en un tablero de ajedrez, tal como se ve en la figura. El problema consiste en hacer que los alfiles negros intercambien posiciones con los blancos, ningún alfil debe atacar en ningún momento otro del colo opuest. Se deben alternar los movimientos, primero uno blanco, luego uno negro, luego uno blanco y así sucesivamente. ¿Cuál es el mínimo número de movimientos en que se puede conseguir?
 
@@ -325,7 +325,7 @@ A continuación, se muestran los movimientos y el resultado obtenido:
 
 # Introducción a la Inteligencia Artificial: Introspección
 
-## Se requiere resolver el siguiente problema analizado la forma es que usted mismo resuelve el problema redactar un ensayo de la solución mínimo 1 cuartilla.
+## Se requiere resolver el siguiente problema analizado la forma es que usted mismo resuelve el problema redactar un ensayo de la solución.
 
 Se trata de contar el numero de elementos (islas) contenidos en la siguiente imagen, se requiere lo siguiente:
 
@@ -337,6 +337,8 @@ Se trata de contar el numero de elementos (islas) contenidos en la siguiente ima
 ---
 
 ### Resolución
+
+```
 
 def contar_islas_recursivo(matriz):
 
@@ -391,9 +393,11 @@ matriz_original = [
 
 resultado = contar_islas_recursivo(matriz_original)
 print("Número de islas: " + str(resultado))
+```
 
 ---
 
+```
 def contar_islas_iterativo(matriz):
 
     filas = len(matriz)
@@ -447,6 +451,7 @@ matriz_original = [
 
 resultado = contar_islas_iterativo(matriz_original)
 print("Número de islas: " + str(resultado))
+```
 
 ### Ensayo
 
@@ -466,17 +471,100 @@ Estos códigos son de mucha lógica en realidad, y es lo que en perspectiva va a
 
 # Introducción a la Inteligencia Artificial: Introspección
 
-## Se requiere resolver el siguiente problema analizado la forma es que usted mismo resuelve el problema.
+## Se requiere resolver el siguiente problema analizado la forma es que usted mismo resuelve el problema, redactar un ensayo de la solución del problema.
 
 Una vez que se resolvió el algoritmo de las islas en la siguiente imagen contar los elementos que tienen el color rojo.
 
 ![Rojos](image-2.png)
 
+---
+
+### Resolución
+
+```
+import cv2 as cv
+
+img = cv.imread('./image-2.png',1)
+img2 = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+img3 = cv.cvtColor(img2, cv.COLOR_RGB2HSV)
+
+umbralBajo = (0, 130, 130)
+umbralAlto = (5, 255, 255)
+
+umbralBajoB = (175, 130, 130)
+umbralAltoB = (180, 255, 255)
+
+mascara1 = cv.inRange(img3, umbralBajo, umbralAlto)
+mascara2 = cv.inRange(img3, umbralBajoB, umbralAltoB)
+
+mascara= mascara1+mascara2
+
+resultado = cv.bitwise_and(img, img, mask=mascara)
+
+def contar_rojos(matriz):
+
+    filas = len(matriz)
+    columnas = len(matriz[0])
+    rojos = 0
+
+    def contar(i, j):
+        pixeles = 0
+        lista = [(i, j)]
+        while lista:
+            x, y = lista.pop()
+            if  x < filas and y < columnas and matriz[x][y] == 255 and matriz[x][y] != 2:
+                matriz[x][y] = 2
+                lista.append((x + 1, y))
+                lista.append((x - 1, y))
+                lista.append((x, y + 1))
+                lista.append((x, y - 1))
+                pixeles += 1
+
+        return pixeles
+
+
+    for i in range(filas):
+        for j in range(columnas):
+            if matriz[i][j] == 255:
+                conteo = contar(i, j)
+                if conteo > 150:
+                    rojos += 1
+            else:
+                matriz[i][j] = 2
+
+    return rojos
+
+matriz_original = mascara
+rojos = contar_rojos(matriz_original)
+print("Número de rojos: " + str(rojos))
+
+cv.putText(img, 'Numero de rojos: ' + str(rojos), (40, 50), cv.FONT_HERSHEY_SIMPLEX, 1.1, (0, 0, 0), 2, cv.LINE_AA)
+cv.imshow('resultado', img)
+
+
+cv.waitKey(0)
+cv.destroyAllWindows()
+```
+
+### Ensayo
+
+El proceso de este ejercicio es bastante similar al anterior, que de hecho tenemos que utilizar un metodo, ya sea recursivo como iterativo, para poder contar los objetos de color rojo, en este caso, se utilizo el método iterativo, ya que es un poco mas sencillo de utilizar en este caso, a mi opinion.
+
+Se utilizo el codigo ya proporcionado por el profesor para la captura y procesamiento de la imagen, y, como se dijo anteriormente se utilizo el metodo iterativo para el conteo de los pixeles, en este caso blancos, de la imagen procesada en escala de grises, esto se identifica que cada pixel con valor 255 o blanco, es un pixel de color rojo.
+
+El codigo iterativo se cambio solo un poco para que en lugar de contar las islas, contara los pixeles blancos, y asi poder identificar los objetos de color rojo y obtener el total.
+
+El principal problema radico en que tomar como un objeto rojo, esto debido a que el procesamiento de la imagen es pixel por pixel, y puede surgir el caso de que en una esquina super escondido se encuentre un pixel rojo, por ello se agrego una condicion para que solo se contaran los objetos que tuvieran mas de 150 pixeles blancos, esto para evitar contar pixeles sueltos que no formaran parte de un objeto rojo.
+
+El tamaño de los pixeles se puede modificar en la linea 45 del codigo, en donde se encuentra la condicion para contar los pixeles, en este caso se utilizo 150, pero se puede modificar a gusto y a conciencia de quien considere cuantos pixeles son suficientes para decir efectivamente lo que se esta viendo es un objeto y no solo pixeles sueltos.
+
+---
+
 # Introducción a la Inteligencia Artificial: El proceso de razonamiento según la lógica
 
 ## 1. Dado el siguiente problema hacer el planteamiento matemático y programar el siguiente problema
 
-La historia que sigue es una versión adaptada de lo que –supuestamente—sucedió durante el siglo I. Sí, el siglo uno. Suena raro, ¿no? Más aún: esa historia dio origen a un problema clásico de la matemática/computación quesobrevivió el paso del tiempo. Se lo conoce con el nombre del “Problema deJosephus”, ya que se supone que fue Flavius Josephus, un historiador judíonacido en Jerusalén, quien describió la situación que vivieron él y 40 soldados que lo acompañaban.
+La historia que sigue es una versión adaptada de lo que –supuestamente—sucedió durante el siglo I. Sí, el siglo uno. Suena raro, ¿no? Más aún: esa historia dio origen a un problema clásico de la matemática/computación quesobrevivió el paso del tiempo. Se lo conoce con el nombre del “Problema de Josephus”, ya que se supone que fue Flavius Josephus, un historiador judíonacido en Jerusalén, quien describió la situación que vivieron él y 40 soldados que lo acompañaban.
 
 En un momento determinado de la guerra judeo-romana, Josephus y su grupo cayeron en una emboscada y quedaron atrapados en una caverna rodeada de soldados enemigos. Después de debatir cómo proceder, optaron por suicidarse antes de ser capturados. Sin embargo, Josephus no estuvo de acuerdo con la propuesta y para que nadie tuviera que quitarse la vida,propuso el siguiente método:
 
@@ -498,11 +586,47 @@ El problema es muy conocido en el mundo de la matemática y los programadores, y
 
 De la misma forma, una vez que hayamos resuelto el problema para 41 soldados, sería interesante pensar en una estrategia que permita deducir cuál será la posición ganadora en el caso general, es decir, independizarse del número 41 y encontrar alguna estrategia o fórmula que permita deducir elnúmero que hay que elegir sin tener que recorrer todos los pasos intermedios.
 
+---
+
+### Resolución
+
+```
+def Josephus (n):
+    soldados = [i for i in range(1, n+1)]
+
+    i = 0
+    while len(soldados) > 1:
+        if i >= len(soldados):
+            i = 0
+
+        if i == len(soldados) -1:
+            soldados.pop(0)
+        else:
+            soldados.pop(i+1)
+
+        i += 1
+
+
+    print("El soldado que se salva es el: ", soldados[0], "\n")
+
+n = 41
+
+Josephus(n)
+```
+
+### Respuesta 
+
+Se sento en el lugar 19.
+
+El problema es bastante confuso y estresante debido a que el modo empirico de resolverlo es tardado, y se notan patrones pero no se muestra una formula clara para sacar el resultado, el mas sencillo de encontrar es el de 2 a la n potencia, si el numero de soldados es el resultado de 2 a la n, el soldado que siempre se salva es el primero que empieza a matar, en este caso, el soldado 1.
+
+Hay mas patrones, por ejemplo despues del resultado de 2 a la n, el siguiente numero de soldados, el que se salva esta en el puesto 3, suponiendo que se empieza por el 1 a matar, y de ahi se va sumando en 2 el puesto del soldado salvado, hasta que el numero de soldados vuelva a ser alguna de las potencias de 2.
+
 # Introducción a la Inteligencia Artificial: El papel de la heurística
 
 ## Dado el siguiente laberinto
 
-- Definir que es la heurística y cual es su papel en la resolución deproblemas
+- Definir que es la heurística y cual es su papel en la resolución de problemas
 - Resolver con recursividad, programar.
 - Proponer Algoritmo de Solución, programar.
 - Describir el punto anterior.
