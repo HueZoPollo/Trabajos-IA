@@ -757,54 +757,79 @@ Y ahora si comenzamos con el entrenamiento de la CNN, obteniendo los siguientes 
 
 Epoch 1/25
 880/880 [==============================] - 35s 35ms/step - loss: 1.3360 - accuracy: 0.4372 - val_loss: 0.9660 - val_accuracy: 0.6649
+
 Epoch 2/25
 880/880 [==============================] - 34s 38ms/step - loss: 0.9279 - accuracy: 0.6640 - val_loss: 0.6518 - val_accuracy: 0.8002
+
 Epoch 3/25
 880/880 [==============================] - 28s 31ms/step - loss: 0.7355 - accuracy: 0.7381 - val_loss: 0.5308 - val_accuracy: 0.8424
+
 Epoch 4/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.6461 - accuracy: 0.7737 - val_loss: 0.4715 - val_accuracy: 0.8434
+
 Epoch 5/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.5883 - accuracy: 0.7983 - val_loss: 0.4242 - val_accuracy: 0.8599
+
 Epoch 6/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.5451 - accuracy: 0.8138 - val_loss: 0.4036 - val_accuracy: 0.8528
+
 Epoch 7/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.5086 - accuracy: 0.8277 - val_loss: 0.3709 - val_accuracy: 0.8730
+
 Epoch 8/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.4886 - accuracy: 0.8363 - val_loss: 0.3558 - val_accuracy: 0.8755
+
 Epoch 9/25
 880/880 [==============================] - 30s 35ms/step - loss: 0.4661 - accuracy: 0.8415 - val_loss: 0.3397 - val_accuracy: 0.8813
+
 Epoch 10/25
 880/880 [==============================] - 30s 34ms/step - loss: 0.4483 - accuracy: 0.8494 - val_loss: 0.3261 - val_accuracy: 0.8866
+
 Epoch 11/25
 880/880 [==============================] - 29s 33ms/step - loss: 0.4328 - accuracy: 0.8556 - val_loss: 0.3117 - val_accuracy: 0.8950
+
 Epoch 12/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.4193 - accuracy: 0.8609 - val_loss: 0.3038 - val_accuracy: 0.8900
+
 Epoch 13/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.4046 - accuracy: 0.8668 - val_loss: 0.2918 - val_accuracy: 0.9002
+
 Epoch 14/25
 880/880 [==============================] - 27s 31ms/step - loss: 0.3937 - accuracy: 0.8686 - val_loss: 0.2855 - val_accuracy: 0.8958
+
 Epoch 15/25
 880/880 [==============================] - 27s 31ms/step - loss: 0.3831 - accuracy: 0.8712 - val_loss: 0.2754 - val_accuracy: 0.9079
+
 Epoch 16/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3785 - accuracy: 0.8734 - val_loss: 0.2717 - val_accuracy: 0.9021
+
 Epoch 17/25
 880/880 [==============================] - 27s 31ms/step - loss: 0.3662 - accuracy: 0.8753 - val_loss: 0.2661 - val_accuracy: 0.9046
+
 Epoch 18/25
 880/880 [==============================] - 29s 32ms/step - loss: 0.3596 - accuracy: 0.8813 - val_loss: 0.2582 - val_accuracy: 0.9049
+
 Epoch 19/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3494 - accuracy: 0.8840 - val_loss: 0.2519 - val_accuracy: 0.9098
+
 Epoch 20/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3406 - accuracy: 0.8843 - val_loss: 0.2464 - val_accuracy: 0.9137
+
 Epoch 21/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3361 - accuracy: 0.8865 - val_loss: 0.2416 - val_accuracy: 0.9136
+
 Epoch 22/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3333 - accuracy: 0.8863 - val_loss: 0.2441 - val_accuracy: 0.9075
+
 Epoch 23/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3281 - accuracy: 0.8892 - val_loss: 0.2354 - val_accuracy: 0.9169
+
 Epoch 24/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3212 - accuracy: 0.8924 - val_loss: 0.2323 - val_accuracy: 0.9154
+
 Epoch 25/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3171 - accuracy: 0.8926 - val_loss: 0.2281 - val_accuracy: 0.9159
+
 
 Como se observa en cada epoca se va mejorando el accuracy y el loss, hasta llegar a un accuracy de 0.8926 y un loss de 0.3171 en la ultima epoca. En un principio se dan unos saltos mucho mayores a los que se dan en las ultimas epocas, pero esto es normal, ya que en las primeras epocas la red no tiene idea de que hacer, pero a medida que se va entrenando, va mejorando y dando mejores resultados.
 
