@@ -136,7 +136,8 @@ Después de varios intentos y debates que se realizaron para hacer practicar a l
 
 El sistema funciona a partir de los distintos artículos, documentos o libros a los que tiene acceso de los cuales obtiene la información del tema del debate para así poder proporcionar un argumento inicial, después de dar este argumento inicial, la computadora tiene que escuchar durante 4 minutos a su contrincante, escuchar el argumento el cual, por lo general, se da de manera rápida y, además, muchas veces tiene dilemas éticos y/o morales, y en el transcurso de la escucha, tiene que ir creando e hilando la información de los artículos a su disposición para dar un contraargumento de manera coherente.
 
-**Inteligencia artificial en el camino **
+**Inteligencia artificial en el camino**
+
 Las aplicaciones de la inteligencia artificial en los últimos años se han estado expandiendo a diferentes ámbitos como la comprensión del lenguaje que utilizan los delfines, la inserción de un robot en el cuerpo policiaco en Dubai o el robot pizzero, el encargado de llevar pizzas a domicilio. Pero uno de los inventos que mas se han estudiado y se han querido implementar es el automóvil autónomo.
 
 Este es uno de los mayores retos de implementación de inteligencia artificial y en demasía complejo. Es complejo por el hecho de que la inteligencia artificial aun no es totalmente perfecta, y en el documenta nos presentan el ejemplo del robot limpiador automático que utilizan muchas personas en casa, en muchas ocasiones este robot tiende a chocar con los muros múltiples veces y esto no representa un problema en el corto plazo de la tarea que tiene que realizar, limpiar la casa; pero al estar hablando de un coche con personas dentro, es necesario que este no cometa la acción de chocar múltiples veces por un fallo no previsto de los desarrolladores.
@@ -614,7 +615,7 @@ n = 41
 Josephus(n)
 ```
 
-### Respuesta 
+### Respuesta
 
 Se sento en el lugar 19.
 
@@ -681,3 +682,169 @@ Monjes (M), Caníbales (C)
 11. Cruzan 1M y 1C al otro lado del rio. Sin cruzar: 0C, 0M. En el otro lado: 3C, 3M.
 
 ¡Listo! Todos han cruzado el río sin que los caníbales se coman a los monjes.
+
+---
+
+# Proyectos finales
+
+## CNN
+
+En el proyecto de la CNN se hizo un entrenamiento de 5 flores diferentes con las siguientes etiquetas y cantidad de imagenes:
+
+- California Poppy Orange: 6425 imagenes
+- Carnation: 6435 imagenes
+- Dandelion (diente de león): 14069 imagenes
+- Iris: 9152 imagenes
+- Yellow Daffodil: 7897 imagenes
+
+Dando un toal de: 43978 imagenes, siendo cada una de ellas de un tamaño de 50x50 pixeles.
+
+Las etiquetas estan dadas de manera secuencial y en orden consecutivo de lo anteriormente mencionado:
+
+- 0: California Poppy Orange
+- 1: Carnation
+- 2: Dandelion
+- 3: Iris
+- 4: Yellow Daffodil
+
+Despues de cargar las imagenes para realizar el entrenamiento, se hace una división del 80% para entrenamiento y 20% para pruebas. Dando asi un total de: 35182 imagenes para entrenamiento y 8796 imagenes para pruebas.
+
+En la siguiente imagen se puede observar las primeras imagenes de entrenamiento y de pruebas respectivamente.
+
+![Primeras imagenes](image-9.png)
+
+Pasando a crear los grupos de entrenamiento y pruebas para ahora si entrenar la CNN, mezclando las imagenes, obtenemos que al final quedo con 28145 imagenes para entrenamiento y 7037 imagenes para pruebas.
+
+Ahora si, empezamos a crear el CNN y entrenarlo con las siguientes configuraciones:
+
+- Un learning rate de 0.001 para controlar los pesos de la red.
+- Un batch size de 32 para entrenar la red, o sea, se van a tomar 32 imagenes para entrenar a la vez en memoria.
+- Y por ultimo, 25 epocas, o 25 iteraciones que se realizaran al conjunto de imagenes para entrenar la red.
+
+Esto nos crea el modelo de la siguiente manera:
+
+---
+
+Model: "sequential"
+
+=================================================================
+
+|         Layer (type)         |    Output Shape    | Param  |
+| :--------------------------: | :----------------: | :----: |
+|       conv2d (Conv2D)        | (None, 50, 50, 32) |  896   |
+|   leaky_re_lu (LeakyReLU)    | (None, 50, 50, 32) |   0    |
+| max_pooling2d (MaxPooling2D) | (None, 25, 25, 32) |   0    |
+|      dropout (Dropout)       | (None, 25, 25, 32) |   0    |
+|      flatten (Flatten)       |   (None, 20000)    |   0    |
+|        dense (Dense)         |     (None, 32)     | 640032 |
+|  leaky_re_lu_1 (LeakyReLU)   |     (None, 32)     |   0    |
+|     dropout_1 (Dropout)      |     (None, 32)     |   0    |
+|       dense_1 (Dense)        |     (None, 5)      |  165   |
+
+=================================================================
+
+Total params: 641093 (2.45 MB)
+
+Trainable params: 641093 (2.45 MB)
+
+Non-trainable params: 0 (0.00 Byte)
+
+---
+
+Y ahora si comenzamos con el entrenamiento de la CNN, obteniendo los siguientes resultados en cada epoca:
+
+---
+
+Epoch 1/25
+880/880 [==============================] - 35s 35ms/step - loss: 1.3360 - accuracy: 0.4372 - val_loss: 0.9660 - val_accuracy: 0.6649
+Epoch 2/25
+880/880 [==============================] - 34s 38ms/step - loss: 0.9279 - accuracy: 0.6640 - val_loss: 0.6518 - val_accuracy: 0.8002
+Epoch 3/25
+880/880 [==============================] - 28s 31ms/step - loss: 0.7355 - accuracy: 0.7381 - val_loss: 0.5308 - val_accuracy: 0.8424
+Epoch 4/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.6461 - accuracy: 0.7737 - val_loss: 0.4715 - val_accuracy: 0.8434
+Epoch 5/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.5883 - accuracy: 0.7983 - val_loss: 0.4242 - val_accuracy: 0.8599
+Epoch 6/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.5451 - accuracy: 0.8138 - val_loss: 0.4036 - val_accuracy: 0.8528
+Epoch 7/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.5086 - accuracy: 0.8277 - val_loss: 0.3709 - val_accuracy: 0.8730
+Epoch 8/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.4886 - accuracy: 0.8363 - val_loss: 0.3558 - val_accuracy: 0.8755
+Epoch 9/25
+880/880 [==============================] - 30s 35ms/step - loss: 0.4661 - accuracy: 0.8415 - val_loss: 0.3397 - val_accuracy: 0.8813
+Epoch 10/25
+880/880 [==============================] - 30s 34ms/step - loss: 0.4483 - accuracy: 0.8494 - val_loss: 0.3261 - val_accuracy: 0.8866
+Epoch 11/25
+880/880 [==============================] - 29s 33ms/step - loss: 0.4328 - accuracy: 0.8556 - val_loss: 0.3117 - val_accuracy: 0.8950
+Epoch 12/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.4193 - accuracy: 0.8609 - val_loss: 0.3038 - val_accuracy: 0.8900
+Epoch 13/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.4046 - accuracy: 0.8668 - val_loss: 0.2918 - val_accuracy: 0.9002
+Epoch 14/25
+880/880 [==============================] - 27s 31ms/step - loss: 0.3937 - accuracy: 0.8686 - val_loss: 0.2855 - val_accuracy: 0.8958
+Epoch 15/25
+880/880 [==============================] - 27s 31ms/step - loss: 0.3831 - accuracy: 0.8712 - val_loss: 0.2754 - val_accuracy: 0.9079
+Epoch 16/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.3785 - accuracy: 0.8734 - val_loss: 0.2717 - val_accuracy: 0.9021
+Epoch 17/25
+880/880 [==============================] - 27s 31ms/step - loss: 0.3662 - accuracy: 0.8753 - val_loss: 0.2661 - val_accuracy: 0.9046
+Epoch 18/25
+880/880 [==============================] - 29s 32ms/step - loss: 0.3596 - accuracy: 0.8813 - val_loss: 0.2582 - val_accuracy: 0.9049
+Epoch 19/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.3494 - accuracy: 0.8840 - val_loss: 0.2519 - val_accuracy: 0.9098
+Epoch 20/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.3406 - accuracy: 0.8843 - val_loss: 0.2464 - val_accuracy: 0.9137
+Epoch 21/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.3361 - accuracy: 0.8865 - val_loss: 0.2416 - val_accuracy: 0.9136
+Epoch 22/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.3333 - accuracy: 0.8863 - val_loss: 0.2441 - val_accuracy: 0.9075
+Epoch 23/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.3281 - accuracy: 0.8892 - val_loss: 0.2354 - val_accuracy: 0.9169
+Epoch 24/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.3212 - accuracy: 0.8924 - val_loss: 0.2323 - val_accuracy: 0.9154
+Epoch 25/25
+880/880 [==============================] - 28s 32ms/step - loss: 0.3171 - accuracy: 0.8926 - val_loss: 0.2281 - val_accuracy: 0.9159
+
+Como se observa en cada epoca se va mejorando el accuracy y el loss, hasta llegar a un accuracy de 0.8926 y un loss de 0.3171 en la ultima epoca. En un principio se dan unos saltos mucho mayores a los que se dan en las ultimas epocas, pero esto es normal, ya que en las primeras epocas la red no tiene idea de que hacer, pero a medida que se va entrenando, va mejorando y dando mejores resultados.
+
+Al quedar evaluada la red nos dan los siguientes valores:
+
+275/275 [==============================] - 2s 8ms/step - loss: 0.2339 - accuracy: 0.9125
+
+Test loss: 0.23393398523330688
+
+Test accuracy: 0.912460207939148
+
+Quedando la siguiente grafica de accuracy y loss en el entrenamiento:
+
+![Grafica accuracy](image-10.png)
+
+![Grafica loss](image-11.png)
+
+Y por ultimo, se hace una prediccion de las imagenes de prueba, obteniendo los siguientes resultados:
+
+Se encontraron 8026 imagenes correctas de las 8796 imagenes totales de prueba, dandonos la siguiente imagenes de las etiquetas correctas con algunas de las imagenes de prueba:
+
+![Pruebas-correctas](image-12.png)
+
+Y las siguientes imagenes de las etiquetas incorrectas con algunas de las imagenes de prueba, en este caso nos dieron 770 imagenes incorrectas o en las que la red no pudo clasificar de manera correcta:
+
+![Pruebas-incorrectas](image-13.png)
+
+Por ultimo dandonos el siguiente resumen de las metricas de rendimiento de la red:
+
+|    #    | precision | recall | f1-score | support |
+| :-----: | :-------: | :----: | :------: | :-----: |
+| Class 0 |   0.91    |  0.83  |   0.87   |  1330   |
+| Class 1 |   0.89    |  0.88  |   0.88   |  1292   |
+| Class 2 |   0.92    |  0.96  |   0.94   |  2796   |
+| Class 3 |   0.95    |  0.91  |   0.93   |  1803   |
+| Class 4 |   0.88    |  0.92  |   0.90   |  1575   |
+
+|   accuracy   |      |      | 0.91 | 8796 |
+| :----------: | :--: | :--: | :--: | :--: |
+|  macro avg   | 0.91 | 0.90 | 0.90 | 8796 |
+| weighted avg | 0.91 | 0.91 | 0.91 | 8796 |
+
+Finalizamos con el guardado de la red para utilizarla en un futuro sin la necesidad de volver a entrenarla y solo cargarla para hacer las predicciones que se requieran. El archivo es un .h5.
