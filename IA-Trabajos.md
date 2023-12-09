@@ -634,6 +634,123 @@ Hay mas patrones, por ejemplo despues del resultado de 2 a la n, el siguiente nu
 
 ![Laberinto](image-4.png)
 
+--- 
+### Resolución
+
+#### ¿Qué es la heurística?
+
+La heurística se define como el conjunto de técnicas o métodos que se utilizan para resolver problemas, que no son necesariamente óptimos, pero que son suficientemente buenos y rapidos para la resolución de situación en la que se encuentran, estas técnicas se ponen en práctica a traves del conocimiento previo o experiencias anteriores.
+
+El papel que toma en la resolución de problemas es que, puede llegar a estar en una situación en la que necesariamente se tiene que resolver la situación actual, pero no se cuenta con mucho tiempo para ello. Igualmente, se puede utilizar como primer paso para solucionar el problema, si es que el mismo ya se ha dado anteriormente.
+
+### Resolución con recursividad
+
+```
+def resolver_laberinto(laberinto, inicio, fin):
+        solucion = []
+
+        def resolver(i, j):
+            if laberinto[i][j] == 1 or (i, j) in solucion:
+                return False
+            if (i, j) == fin:
+                solucion.append((i, j))
+                return True
+            solucion.append((i, j))
+            if resolver(i + 1, j) or resolver(i, j + 1) or resolver(i - 1, j) or resolver(i, j - 1):
+                return True
+            solucion.pop()
+            return False
+        
+        if resolver(inicio[0], inicio[1]):
+            return solucion
+
+laberinto = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 0, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 1, 1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 0, 1, 0, 1],
+    [0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+]
+
+incio = (1, 0)
+fin = (7, 0)
+
+
+resultado = resolver_laberinto(laberinto, incio, fin)
+if resultado:
+    print("El camino es: ")
+    print(resultado)
+else:
+    print("No hay camino")
+
+
+```
+### Propuesta de algoritmo de solución
+
+```
+class Nodo:
+    def __init__(self, x, y, costo, padre):
+        self.x = x
+        self.y = y
+        self.costo = costo
+        self.padre = padre
+
+class ListaAbiertos:
+    def __init__(self):
+        self.nodos = []
+
+    def agregar(self, nodo):
+        self.nodos.append(nodo)
+
+    def remover(self, nodo):
+        self.nodos.remove(nodo)
+
+    def nodo_con_menor_peso(self):
+        return self.nodos[0]
+    
+    def contiene(self, nodo):
+        return nodo in self.nodos
+    
+
+class ListaCerrados:
+    def __init__(self):
+        self.nodos = []
+
+    def agregar(self, nodo):
+        self.nodos.append(nodo)
+
+    def contiene(self, nodo):
+        return nodo in self.nodos
+
+
+laberinto = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 0, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 1, 1, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 0, 1, 0, 1],
+    [0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+]
+
+inicio = (1, 0)
+fin = (7, 0)
+
+resultado = resolver_laberinto(laberinto, inicio, fin)
+if resultado:
+    print("El camino es: ")
+    print(resultado)
+else:
+    print("No hay camino")
+```
+
+---
 # Reglas y Búsquedas: Espacio de estados
 
 ## Generar el espacio de estados para los siguientes problemas
