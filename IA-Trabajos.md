@@ -990,3 +990,384 @@ Por ultimo dandonos el siguiente resumen de las metricas de rendimiento de la re
 | weighted avg | 0.91 | 0.91 | 0.91 | 8796 |
 
 Finalizamos con el guardado de la red para utilizarla en un futuro sin la necesidad de volver a entrenarla y solo cargarla para hacer las predicciones que se requieran. El archivo es un .h5.
+
+---
+## Phaser
+
+En el proyecto de Phaser, se realizo la modificación al juego de esquivas balas de la nave, añadiendo una segunda bala cayendo verticalmente, el código es el siguiente: 
+
+```
+var w = 800;
+var h = 400;
+var jugador;
+var fondo;
+
+var bala,
+  balaD = false,
+  nave;
+
+var nave2;
+var bala2,
+  balaD2 = false;
+
+var salto;
+var menu;
+var collisionOcurred = false;
+
+var velocidadBala;
+var gravedadBala;
+var despBala;
+var despBala2;
+var estatusAire;
+var estatuSuelo;
+var der;
+var estatusDer;
+
+var mov = 0;
+
+var nnNetwork,
+  nnEntrenamiento,
+  nnSalida,
+  datosEntrenamiento = [];
+var modoAuto = false,
+  eCompleto = false;
+
+var juego = new Phaser.Game(w, h, Phaser.CANVAS, "", {
+  preload: preload,
+  create: create,
+  update: update,
+  render: render,
+});
+
+function preload() {
+  juego.load.image("fondo", "assets/game/fondo.jpg");
+  juego.load.spritesheet("mono", "assets/sprites/altair.png", 32, 48);
+  juego.load.image("nave", "assets/game/ufo.png");
+  juego.load.image("bala", "assets/sprites/purple_ball.png");
+  juego.load.image("menu", "assets/game/menu.png");
+}
+
+function create() {
+  juego.physics.startSystem(Phaser.Physics.ARCADE);
+  juego.physics.arcade.gravity.y = 800;
+  juego.time.desiredFps = 30;
+
+  fondo = juego.add.tileSprite(0, 0, w, h, "fondo");
+  nave = juego.add.sprite(w - 100, h - 70, "nave");
+  bala = juego.add.sprite(w - 100, h, "bala");
+  jugador = juego.add.sprite(50, h, "mono");
+  nave2 = juego.add.sprite(jugador.position.x - 30, 0, "nave");
+  bala2 = juego.add.sprite(nave2.position.x + 45, 50, "bala");
+
+  juego.physics.enable(jugador);
+  jugador.body.collideWorldBounds = true;
+  var corre = jugador.animations.add("corre", [8, 9, 10, 11]);
+  jugador.animations.play("corre", 10, true);
+
+  juego.physics.enable(bala);
+  juego.physics.enable(bala2);
+  bala.body.collideWorldBounds = true;
+  bala2.body.collideWorldBounds = true;
+
+  pausaL = juego.add.text(w - 100, 20, "Pausa", {
+    font: "20px Arial",
+    fill: "#fff",
+  });
+  pausaL.inputEnabled = true;
+  pausaL.events.onInputUp.add(pausa, self);
+  juego.input.onDown.add(mPausa, self);
+
+  salto = juego.input.keyboard.addKey(Phaser.Keyboard.W);
+  der = juego.input.keyboard.addKey(Phaser.Keyboard.D);
+
+  nnNetwork = new synaptic.Architect.Perceptron(4, 6, 6, 3);
+  nnEntrenamiento = new synaptic.Trainer(nnNetwork);
+}
+
+function enRedNeural() {
+nnEntrenamiento.train(datosEntrenamiento, {
+  rate: 0.0001,
+  iterations: 10000,
+  shuffle: true,
+});
+}
+
+function datosDeEntrenamiento(param_entrada) {
+  console.log(
+    "Entrada",
+    param_entrada[0] +
+      " " +
+      param_entrada[1] +
+      " " +
+      param_entrada[2] +
+      " " +
+      param_entrada[3]
+  );
+  nnSalida = nnNetwork.activate(param_entrada);
+  var aire = Math.round(nnSalida[0] * 100);
+  var piso = Math.round(nnSalida[1] * 100);
+  var der = Math.round(nnSalida[2] * 100);
+  console.log(
+    "Valor ",
+    "En el Aire %: " + aire + " En el suelo %: " + piso + " En el der %: " + der
+  );
+  if (aire > piso && aire > der && jugador.body.onFloor()) {
+    return 1;
+  } else if (der > aire) return 2;
+  else return 0;
+}
+
+// function datosDeEntrenamiento(param_entrada) {
+//     console.log("Entrada", param_entrada[0] + " " + param_entrada[1]);
+//     nnSalida = nnNetwork.activate(param_entrada);
+//     var resultado = Math.round(nnSalida[0] * 100);
+//     console.log("Valor ", "Resultado %: " + resultado);
+//     return resultado >= 50; // Cambia el umbral según tus necesidades
+// }
+
+function pausa() {
+  juego.paused = true;
+  menu = juego.add.sprite(w / 2, h / 2, "menu");
+  menu.anchor.setTo(0.5, 0.5);
+}
+
+function mPausa(event) {
+  if (juego.paused) {
+    var menu_x1 = w / 2 - 270 / 2,
+      menu_x2 = w / 2 + 270 / 2,
+      menu_y1 = h / 2 - 180 / 2,
+      menu_y2 = h / 2 + 180 / 2;
+
+    var mouse_x = event.x,
+      mouse_y = event.y;
+
+    if (
+      mouse_x > menu_x1 &&
+      mouse_x < menu_x2 &&
+      mouse_y > menu_y1 &&
+      mouse_y < menu_y2
+    ) {
+      if (
+        mouse_x >= menu_x1 &&
+        mouse_x <= menu_x2 &&
+        mouse_y >= menu_y1 &&
+        mouse_y <= menu_y1 + 90
+      ) {
+        eCompleto = false;
+        datosEntrenamiento = [];
+        modoAuto = false;
+      } else if (
+        mouse_x >= menu_x1 &&
+        mouse_x <= menu_x2 &&
+        mouse_y >= menu_y1 + 90 &&
+        mouse_y <= menu_y2
+      ) {
+        if (!eCompleto) {
+          console.log(
+            "",
+            "Entrenamiento " + datosEntrenamiento.length + " valores"
+          );
+          enRedNeural();
+          eCompleto = true;
+        }
+        modoAuto = true;
+      }
+
+      menu.destroy();
+      resetAll();
+      juego.paused = false;
+      // console.log(datosDeEntrenamiento.length);
+    }
+  }
+}
+
+function resetAll() {
+  jugador.body.velocity.x = 0;
+  jugador.body.velocity.y = 0;
+  jugador.position.x = 50;
+  bala.body.velocity.x = 0;
+  bala.position.x = w - 100;
+  balaD = false;
+  bala2.body.velocity.y = 0;
+  bala2.position.y = 50;
+  bala2.body.allowGravity = true;
+  balaD2 = false;
+}
+
+function resetBala2() {
+  bala2.position.y = 50;
+  bala2.body.velocity.y = 0;
+  bala2.body.allowGravity = false;
+  jugador.body.velocity.y = 0;
+  balaD2 = false;
+}
+
+function saltar() {
+  jugador.body.velocity.y -= 270;
+}
+
+function moverDer() {
+  jugador.body.position.x += 7;
+}
+
+function update() {
+  fondo.tilePosition.x -= 1;
+
+  juego.physics.arcade.collide([bala, bala2], jugador, colisionH, null, this);
+  // juego.physics.arcade.collide(bala2, jugador, colisionH, null, this);
+
+  estatuSuelo = 1;
+  estatusAire = 0;
+  estatusDer = 0;
+
+  if (!jugador.body.onFloor()) {
+    estatuSuelo = 0;
+    estatusAire = 1;
+  }
+
+  despBala = Math.floor(jugador.position.x - bala.position.x);
+
+  despBala2 = Math.floor(jugador.position.y - bala2.position.y);
+
+  if (modoAuto == false && salto.isDown && jugador.body.onFloor()) {
+    saltar();
+  }
+
+  if (modoAuto == false && der.isDown) {
+    moverDer();
+    estatusDer = 1;
+  }
+
+  if (
+    modoAuto == true &&
+    (bala.position.x < 400 || bala2.position.y > h - 200)
+  ) {
+    const result = datosDeEntrenamiento([
+      despBala,
+      velocidadBala,
+      despBala2,
+      gravedadBala,
+    ]);
+    if (result == 1) {
+      saltar();
+    } else if (result == 2) {
+      moverDer();
+    }
+  }
+
+  if (balaD == false) {
+    disparo();
+  }
+
+  if (balaD2 == false) {
+    disparo2();
+  }
+
+  if (bala.position.x <= 0) {
+    resetAll();
+  }
+
+  if (bala2.position.y >= h - 30) {
+    resetBala2();
+  }
+
+  if (
+    modoAuto == false &&
+    (bala.position.x < 400 || bala2.position.y > h - 200)
+  ) {
+    datosEntrenamiento.push({
+      input: [despBala, velocidadBala, despBala2, gravedadBala],
+      output: [estatusAire, estatuSuelo, estatusDer],
+    });
+
+    console.log(
+      despBala +
+        " " +
+        velocidadBala +
+        " " +
+        despBala2 +
+        " " +
+        gravedadBala +
+        " " +
+        estatusAire +
+        " " +
+        estatuSuelo +
+        " " +
+        estatusDer
+    );
+  }
+}
+
+function disparo() {
+  velocidadBala = -1 * velocidadRandom(250, 500);
+  // velocidadBala = -300;
+  bala.body.velocity.y = 0;
+  bala.body.velocity.x = velocidadBala;
+  balaD = true;
+}
+
+function disparo2() {
+  gravedadBala = velocidadRandom(50, 100);
+  bala2.body.velocity.y = gravedadBala;
+  balaD2 = true;
+}
+
+function colisionH() {
+  pausa();
+}
+
+function velocidadRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function render() {}
+
+```
+
+Aquí se puede observar que se añadio una segunda bala llamada bala2, igualmente, se añadio una seguna nave a manera de apoyo visual para el jugador, desde ahí se lanza la segunda bala.
+
+La bala2 es similar a la primera, tiene una velocidad, que en este caso es una gravedad dada por un numero aleatorio entre 50 y 100, y se lanza desde la posición de la nave2, que es la nave que se añadio para apoyo visual.
+
+Para la parte del entrenamiento, se delimito el area donde se agregan valores a la red neuronal, asi como los los valores en donde el jugador, haciendo uso de la red neuronal entrenada, juega solo; siendo los siguientes valores:
+
+```
+(bala.position.x < 400 || bala2.position.y > h - 200)
+```
+
+En donde se le indica a la red neuronal que solo se entrenara cuando la bala este a una distancia menor a 400 pixeles del jugador, de manera horizontal, o cuando la bala2 este a una distancia mayor a 200 pixeles del suelo.
+
+El modelo de la red neuronal es el siguiente:
+
+```
+nnNetwork = new synaptic.Architect.Perceptron(4, 6, 6, 3);
+```
+En este utilizo 4 entradas, las cuales son: 
+- La distancia horizontal entre el jugador y la bala.
+- La velocidad de la bala.
+- La distancia vertical entre el jugador y la bala2.
+- La gravedad de la bala2.
+
+2 capas ocultas, cada una con 6 neuronas, y 3 salidas, las cuales son:
+
+- Si el jugador esta en el aire.
+- Si el jugador esta en el suelo.
+- Si el jugador se mueve a la derecha.
+
+El entrenamiento se realiza con los siguientes valores:
+
+```
+nnEntrenamiento.train(datosEntrenamiento, {
+  rate: 0.0001,
+  iterations: 10000,
+  shuffle: true,
+});
+```
+
+Con un learning rate de 0.0001, 10000 iteraciones y mezclando los datos de entrenamiento en cada iteración.
+
+Todo esto da como resultado que el jugador pueda jugar solo, dando movimientos de salto y movimiento a la derecha, de manera correcta, esquivando las balas. Para el entrenamiento son necesarias las teclas W y D, para el salto y el movimiento a la derecha respectivamente.
+
+Al estar limitado en un rango de pixeles, es necesario entrenar a la red con valores cercanos a ese rango, por lo que si se empieza a mover, sobre todo hacia la derecha, la red podra no tener los suficientes valores de entrada para determinar si debe moverse o no.
+
+---
+
