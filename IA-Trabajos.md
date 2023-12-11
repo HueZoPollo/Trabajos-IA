@@ -634,7 +634,8 @@ Hay mas patrones, por ejemplo despues del resultado de 2 a la n, el siguiente nu
 
 ![Laberinto](image-4.png)
 
---- 
+---
+
 ### Resolución
 
 #### ¿Qué es la heurística?
@@ -660,7 +661,7 @@ def resolver_laberinto(laberinto, inicio, fin):
                 return True
             solucion.pop()
             return False
-        
+
         if resolver(inicio[0], inicio[1]):
             return solucion
 
@@ -689,6 +690,7 @@ else:
 
 
 ```
+
 ### Propuesta de algoritmo de solución
 
 ```
@@ -711,10 +713,10 @@ class ListaAbiertos:
 
     def nodo_con_menor_peso(self):
         return self.nodos[0]
-    
+
     def contiene(self, nodo):
         return nodo in self.nodos
-    
+
 
 class ListaCerrados:
     def __init__(self):
@@ -751,6 +753,7 @@ else:
 ```
 
 ---
+
 # Reglas y Búsquedas: Espacio de estados
 
 ## Generar el espacio de estados para los siguientes problemas
@@ -799,6 +802,43 @@ Monjes (M), Caníbales (C)
 11. Cruzan 1M y 1C al otro lado del rio. Sin cruzar: 0C, 0M. En el otro lado: 3C, 3M.
 
 ¡Listo! Todos han cruzado el río sin que los caníbales se coman a los monjes.
+
+---
+# Generación de DataSet
+
+## Generar un DataSet de rostros, por lo menos 5 diferentes
+
+### Resolución
+
+Se utilizo el siguiente código para la generación de las imagenes:
+
+```
+import numpy as np
+import cv2 as cv
+import math
+
+cap = cv.VideoCapture(0)
+i = 0
+
+while True:
+    
+    ret, frame = cap.read()
+    frame2 = frame[100:400,100:400]
+    frame2_gray = cv.cvtColor(frame2,cv.COLOR_BGR2GRAY)
+    
+    
+    cv.imshow('mi cara',frame)
+    cv.imshow('mi cara 2', frame2)
+    k = cv.waitKey(1)
+    if k== ord('a'):
+        i=i+1
+        cv.imwrite('Fotillos/SinMask/Cara'+str(i)+'.jpg',frame2_gray)
+    if k==27:
+        break
+cap.release()
+cv.destroyAllWindows()    
+```
+Las imagenes se tomaron con la resolución de 300x300 pixeles, con ello se tomaron poco mas de 1800 imagenes en total, con mas de 5 personas diferentes.
 
 ---
 
@@ -947,7 +987,6 @@ Epoch 24/25
 Epoch 25/25
 880/880 [==============================] - 28s 32ms/step - loss: 0.3171 - accuracy: 0.8926 - val_loss: 0.2281 - val_accuracy: 0.9159
 
-
 Como se observa en cada epoca se va mejorando el accuracy y el loss, hasta llegar a un accuracy de 0.8926 y un loss de 0.3171 en la ultima epoca. En un principio se dan unos saltos mucho mayores a los que se dan en las ultimas epocas, pero esto es normal, ya que en las primeras epocas la red no tiene idea de que hacer, pero a medida que se va entrenando, va mejorando y dando mejores resultados.
 
 Al quedar evaluada la red nos dan los siguientes valores:
@@ -992,9 +1031,10 @@ Por ultimo dandonos el siguiente resumen de las metricas de rendimiento de la re
 Finalizamos con el guardado de la red para utilizarla en un futuro sin la necesidad de volver a entrenarla y solo cargarla para hacer las predicciones que se requieran. El archivo es un .h5.
 
 ---
+
 ## Phaser
 
-En el proyecto de Phaser, se realizo la modificación al juego de esquivas balas de la nave, añadiendo una segunda bala cayendo verticalmente, el código es el siguiente: 
+En el proyecto de Phaser, se realizo la modificación al juego de esquivas balas de la nave, añadiendo una segunda bala cayendo verticalmente, el código es el siguiente:
 
 ```
 var w = 800;
@@ -1341,7 +1381,9 @@ El modelo de la red neuronal es el siguiente:
 ```
 nnNetwork = new synaptic.Architect.Perceptron(4, 6, 6, 3);
 ```
-En este utilizo 4 entradas, las cuales son: 
+
+En este utilizo 4 entradas, las cuales son:
+
 - La distancia horizontal entre el jugador y la bala.
 - La velocidad de la bala.
 - La distancia vertical entre el jugador y la bala2.
@@ -1371,3 +1413,65 @@ Al estar limitado en un rango de pixeles, es necesario entrenar a la red con val
 
 ---
 
+## Cascade
+
+En este proyecto se realizo un dataset de imagenes de personas con cubrebocas, utilizando la herramienta de Cascade Trainer GUI, se entrenaron varios cascades, difiriendo en varias cosas, como la cantidad de imagenes tanto positivas como negativas, el tamaño de las imagenes, el color, etc., igualmente, el mejor resultado obtenido fue el siguiente (tambien se adjunta el cascade en este repositorio):
+
+- Con 4372 imagenes negativas
+- 2037 imagenes positivas
+- Diferentes tamaños entre imagenes
+- Todas las imagenes estan a blanco y negro
+
+Junto con la configuración del Cascade Trainer:
+
+- 80% de imagenes positivas
+- Todas las imagenes negativas
+- 20 etapas
+
+Todo el entrenamiento con 4gb de RAM tomo al rededor de 3-4 horas.
+
+Para el dataset se utilizaron imagenes tomadas por compañeros de clase, en distintas áreas y fondos, y para imagenes negativas, los fondos como tal. También se agregarón fotos externas tomadas de internet para complementar el cascade.
+
+Para la detección se utilizo el siguiente codigo:
+
+```
+import numpy as np
+import cv2 as cv
+
+
+rostro = cv.CascadeClassifier('cascade7.xml')
+cap = cv.VideoCapture(0)
+x=y=w=h= 0
+img = 0
+count = 0
+while True:
+    ret, frame = cap.read()
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    rostros = rostro.detectMultiScale(gray, scaleFactor=1.055, minNeighbors=200, minSize=(70,70), maxSize=(400,400))
+    for(x, y, w, h) in rostros:
+        m= int(h/2)
+        frame = cv.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 3)
+
+    cv.imshow('rostros', frame)
+
+    k = cv.waitKey(1)
+    if k == 27:
+        break
+cap.release()
+cv.destroyAllWindows()
+```
+
+Se utilizarón las configuraciones para la detección de rostros siguiente:
+
+- scaleFactor=1.055
+- minNeighbors=200
+- minSize=(70,70)
+- maxSize=(400,400)
+
+Los valores se obtuvieron a prueba y error, ya que se buscaba que detectara el rostro con el cubrebocas, pero que no detectara otras cosas, como las manos, el fondo, o a personas sin cubrebocas, por lo que se fue probando hasta obtener los valores que se muestran arriba.
+
+Un scaleFactor bajo para que detectara mas facil de cerca, el minNeighbors alto para que no detectara cosas que no fueran rostros, y los tamaños de minSize y maxSize para que detectara rostros de un tamaño considerable, pero no demasiado grande.
+
+Un ejemplo de la detección es el siguiente:
+
+![Detección](image-14.png)
