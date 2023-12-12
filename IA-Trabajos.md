@@ -695,10 +695,12 @@ else:
 
 ```
 class Nodo:
-    def __init__(self, x, y, costo, padre):
+    def __init__(self, x, y, g, h, padre):
         self.x = x
         self.y = y
-        self.costo = costo
+        self.g = g
+        self.h = h
+        self.f = g + h
         self.padre = padre
 
 class ListaAbiertos:
@@ -729,6 +731,65 @@ class ListaCerrados:
         return nodo in self.nodos
 
 
+class Laberinto:
+    def __init__(self, laberinto):
+        self.laberinto = laberinto
+
+    def es_pared(self, x, y):
+        return self.laberinto[x][y]
+
+    def obtener_vecinos(self, x, y):
+        vecinos = []
+        if x > 0:
+            vecinos.append((x - 1, y))
+        if x < len(self.laberinto) - 1:
+            vecinos.append((x + 1, y))
+        if y > 0:
+            vecinos.append((x, y - 1))
+        if y < len(self.laberinto[0]) - 1:
+            vecinos.append((x, y + 1))
+        return vecinos
+
+
+def resolver_laberinto(laberinto, inicio, fin):
+    lista_abiertos = ListaAbiertos()
+    lista_cerrados = ListaCerrados()
+    lista_abiertos.agregar(Nodo(inicio[0], inicio[1], 0, 0, None))
+    lab = Laberinto(laberinto)
+    while lista_abiertos.nodos:
+
+        nodo_actual = lista_abiertos.nodo_con_menor_peso()
+
+        if nodo_actual.x == fin[0] and nodo_actual.y == fin[1]:
+            camino = []
+            while nodo_actual.padre:
+                camino.append((nodo_actual.x, nodo_actual.y, nodo_actual.f))
+                nodo_actual = nodo_actual.padre
+            camino.append((nodo_actual.x, nodo_actual.y))
+            return camino[::-1]
+
+        lista_abiertos.remover(nodo_actual)
+        lista_cerrados.agregar(nodo_actual)
+
+        for vecino in lab.obtener_vecinos(nodo_actual.x, nodo_actual.y):
+            if lab.es_pared(vecino[0], vecino[1]) == 1 or lista_cerrados.contiene(Nodo(vecino[0], vecino[1], 0, 0, None)):
+                continue
+            g = nodo_actual.g + 10
+            h = ((fin[0] - vecino[0]) + abs(fin[1] - vecino[1]))*10
+            costo = g + h
+            if lista_abiertos.contiene(Nodo(vecino[0], vecino[1], 0, 0, None)) == False:
+                lista_abiertos.agregar(Nodo(vecino[0], vecino[1], g, h, nodo_actual))
+            else:
+                for nodo in lista_abiertos.nodos:
+                    if nodo.x == vecino[0] and nodo.y == vecino[1]:
+                        if nodo.f > costo:
+                            nodo.g = g
+                            nodo.h = h
+                            nodo.f = costo
+                            nodo.padre = nodo_actual
+                        break
+
+
 laberinto = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1],
     [0, 0, 0, 0, 0, 0, 1, 0, 1],
@@ -751,6 +812,57 @@ if resultado:
 else:
     print("No hay camino")
 ```
+
+### Descripción del algoritmo
+
+El algoritmo de solución propuesto es el algoritmo A\*, que utiliza una función heurística para encontrar el camino más corto entre un punto inicial y un punto final, en este caso denominados nodos.
+
+El A* es ampliamente utilizado en videojuegos como League of Legends, para encontrar el camino mas corto entre dos puntos; este algoritmo cuenta con un peso para cada nodo que se va visitando, siendo dos valores "h" y "g" que son la distancia entre el nodo actual y el nodo final, y el costo de moverse una casilla, respectivamente. El peso total de cada nodo es la suma de estos dos valores, lo que corresponde al valor de "f".
+
+En este caso se le da el valor de 10 al valor de movimiento o "g". En muchos casos se pueden utilizar movimientos verticales, horizontales y diagonales. Para este ejercicio solamente tome en cuenta el movimiento vertical y horizontal, si se quisiera mover en diagonal se le daria el valo de 14 al valor de "g", pero este no es el caso.
+
+Se utilizan 4 clases para la resolución del problema, la clase Nodo, que es la que contiene los valores de cada nodo, la clase ListaAbiertos, que es la que contiene los nodos que se visitaron y sacaron su valor de peso, la clase ListaCerrados, la cual contiene los nodos con menor peso en cada iteración y que llevan el recorrido correcto o mas optimizado para la resolución del problema, y por ultimo la clase Laberinto, que es la que contiene la matriz del laberinto y los metodos para saber si es pared o no, y obtener los vecinos de cada nodo.
+
+El codigo para resolver el laberinto empieza como el anterior, mandando como parametros la matriz inicial y los puntos inicial y final, y se crea una lista abierta y una cerrada, ademas se agrega el punto inicial a la lista abierta como nodos, el primer nodo o el nodo inicial comienza sin peso o sin valores en "g", "h" y "f".
+
+```
+lista_abiertos = ListaAbiertos()
+lista_cerrados = ListaCerrados()
+lista_abiertos.agregar(Nodo(inicio[0], inicio[1], 0, 0, None))
+```
+
+Despues de ello se entra en un ciclo while donde se obtiene el nodo con menor peso, y siempre se verifica si las coordenadas de ese nodo corresponden al punto final o a la meta. Si no es asi, se agrega el nodo obtenido a la lista cerrada y se elimina de la lista abierta, para seguir con el proceso de los vecinos de ese nodo.
+
+Se hace un ciclo foreach para obtener los vecinos de ese nodo, y se verifica si es pared o si ya esta en la lista cerrada, si es asi, se continua con el siguiente vecino, si no es asi, se le asigna el valor de "g" y "h" al vecino, y se le asigna el valor de "f" que es la suma de "g" y "h", y se agrega a la lista abierta solo si no se encuentra en ella actualmente.
+
+```
+for vecino in lab.obtener_vecinos(nodo_actual.x, nodo_actual.y):
+            if lab.es_pared(vecino[0], vecino[1]) == 1 or lista_cerrados.contiene(Nodo(vecino[0], vecino[1], 0, 0, None)):
+                continue
+            g = nodo_actual.g + 10
+            h = ((fin[0] - vecino[0]) + abs(fin[1] - vecino[1]))*10
+            costo = g + h
+            if lista_abiertos.contiene(Nodo(vecino[0], vecino[1], 0, 0, None)) == False:
+                lista_abiertos.agregar(Nodo(vecino[0], vecino[1], g, h, nodo_actual))
+```
+
+Si es que ya se encuentra en ella se verifica si el valor de "f" del vecino es mayor al valor de "f" calculado, si es asi, se le asigna el valor de "g", "h" y "f" al vecino, y se le asigna como padre al nodo actual.
+
+```
+else:
+                for nodo in lista_abiertos.nodos:
+                    if nodo.x == vecino[0] and nodo.y == vecino[1]:
+                        if nodo.f > costo:
+                            nodo.g = g
+                            nodo.h = h
+                            nodo.f = costo
+                            nodo.padre = nodo_actual
+                        break
+```
+
+Esto se hace hasta que se encuentre el nodo final, para luego hacer un ciclo para obtener todos los padres de los nodos contenidos en la lista Cerrada, y asi obtener el camino mas corto, y se retorna el camino.
+
+Con ello se obtiene el camino mas corto entre el punto inicial y el final, y se muestra en pantalla por medio del algoritmo A*.
 
 ---
 
@@ -804,6 +916,7 @@ Monjes (M), Caníbales (C)
 ¡Listo! Todos han cruzado el río sin que los caníbales se coman a los monjes.
 
 ---
+
 # Generación de DataSet
 
 ## Generar un DataSet de rostros, por lo menos 5 diferentes
@@ -821,12 +934,12 @@ cap = cv.VideoCapture(0)
 i = 0
 
 while True:
-    
+
     ret, frame = cap.read()
     frame2 = frame[100:400,100:400]
     frame2_gray = cv.cvtColor(frame2,cv.COLOR_BGR2GRAY)
-    
-    
+
+
     cv.imshow('mi cara',frame)
     cv.imshow('mi cara 2', frame2)
     k = cv.waitKey(1)
@@ -836,8 +949,9 @@ while True:
     if k==27:
         break
 cap.release()
-cv.destroyAllWindows()    
+cv.destroyAllWindows()
 ```
+
 Las imagenes se tomaron con la resolución de 300x300 pixeles, con ello se tomaron poco mas de 1800 imagenes en total, con mas de 5 personas diferentes.
 
 ---
